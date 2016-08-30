@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html >
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Bolt Settings</title>
+      <style>
+            
+         body {
+         font-family: Arial;
+         background-color: #3498DB;
+         /*padding: 50px;*/
+         }
+         .wifi {
+         margin: 80px auto;
+         }
+         .wifi-screen {
+         width: 700px !important;
+         background-color: #FFF;
+         padding: 20px;
+         border-radius: 5px
+         }
+         .app-title {
+         color: #777;}
+
+          .btn {
+         border: 2px solid transparent;
+         font-size: 16px;
+         line-height: 25px;
+         padding: 10px 0;
+         text-decoration: none;
+         text-shadow: none;
+         border-radius: 3px;
+         box-shadow: none;
+         transition: 0.25s;
+         display: block;
+         width: 250px;
+         margin: 0 auto;
+         }
+      </style>
+      <script> 
+       function check_terms_agreed(){
+         if(document.getElementById('term').checked) {
+            var term_object = document.getElementById("update_button");
+            term_object.disabled = false;
+            term_object.style.backgroundColor = "#3498DB";
+            term_object.style.color = "white";
+         }
+         else if(document.getElementById('term').checked) {
+            alert("Plase accept terms and condition");
+         }
+       }
+         function update_firmware(){
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+            xhr.addEventListener("readystatechange", function () {
+               if (this.readyState === 4) {
+                  document.getElementById("response_bolt_update").innerHTML="Your BOLT devices will be restarted";
+               }
+            });
+            xhr.open("GET", "/update");
+            xhr.send();
+         }
+      </script>
+   </head>
+   <body>
+      <div class="wifi" align="center">
+         <div class="wifi-screen" style="width:400px;">
+            <div class="app-title">
+               <h1>BOLT Firmware</h1>
+
+               <table>
+                 <tr><td><b> Please read the following instructions before proceeding with the update </b></tr></td>
+                  <tr><td>* Do not disconnect the power supply while updating.</tr></td>
+                  <tr><td> * Ideally update the device while it is connected to fully charged Power-bank/Laptop
+                 <tr><td>* In case the  BOLT loses power supply then it could permanently damage  the BOLT unit .</tr></td>
+                  <tr><td>* The update is not possible for devices lesser tha version -1.3.1 </tr></td>
+                  </tr></td>
+               </table>
+               <input type="radio" name="terms"  id="term" value="checked" onchange="check_terms_agreed()"> I have read and agreed terms and condition.<br>
+            </div>
+            <div class="wifi-form">
+               <button id="update_button" class="btn" onclick="update_firmware()" disabled>Update</button>
+
+               <span id="response_bolt_update"></span>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>
