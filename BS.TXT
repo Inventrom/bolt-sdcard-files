@@ -1,0 +1,8 @@
+bolt_name:
+bolt_hostname:
+bolt_AP_name:
+bolt_AP_pswd:bolt1234
+default_file:index.htm
+download_file:wificon
+ssid:
+pswd:
