@@ -83,10 +83,43 @@
          xmlhttp.open("GET","/configureSettings?boltName="+boltName,true);
          xmlhttp.send();
          }
+
+         function register_to_cloud() {
+         var xmlhttp = new XMLHttpRequest();
+         var email = document.getElementById("email").value;
+         console.log("inside register");
+          xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+               document.getElementById("response").innerHTML=xmlhttp.responseText;
+           }
+          };
+         xmlhttp.open("GET","/register?email="+email,true);
+         xmlhttp.send();
+         }
+         
+         function set_WiFi(){
+            var ssid = document.getElementById("ssid").value;
+            var password = document.getElementById("password").value;
+            var data = new FormData();
+            data.append("ssid", ssid);
+            data.append("password", password );
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+            xhr.addEventListener("readystatechange", function () {
+               if (this.readyState === 4) {
+                  console.log(this.responseText);
+                  document.getElementById("response_wifi").innerHTML=this.responseText;
+               }
+            });
+            xhr.open("POST", "/wifi_setup/");
+            xhr.setRequestHeader("cache-control", "no-cache");
+            xhr.setRequestHeader("postman-token", "5e625bbc-ad3a-ea3a-2ae3-1761109dfa27");
+            xhr.send(data);
+         }
       </script>
    </head>
    <body>
-      <div class="wifi">
+ ``   <div class="wifi">
          <div class="wifi-screen">
             <div class="app-title">
                <h1>Wi-Fi</h1>
@@ -101,8 +134,9 @@
                      <input type="password" class="wifi-field" value="" placeholder="Wi-Fi password" id="password" name="password">
                      <label class="wifi-field-icon fui-lock" for="wifi-pass"></label>
                   </div>
-                  <button type="submit" class="btn btn-primary btn-large btn-block" >SAVE AND RESTART</button>
+                  <button type="button" class="btn btn-primary btn-large btn-block" onclick="set_WiFi()" >SAVE AND RESTART</button>
                </form>
+               <span id="response_wifi"></span>
             </div>
          </div>
       </div>
@@ -117,6 +151,20 @@
                </div>
                <button type="button" class="btn btn-primary btn-large btn-block" onClick="setBoltName();">SAVE</button>
             </div>
+         </div>
+      </div>
+      <div class="wifi">
+         <div class="wifi-screen">
+            <div class="app-title">
+               <h1>Register To Cloud</h1>
+            </div>
+            <div class="wifi-form" id="email_div">
+               <div class="control-group">
+                  <input type="text" class="wifi-field" value="" placeholder="Enter Your registered email id" id="email" name="email">
+               </div>
+               <button type="button" class="btn btn-primary btn-large btn-block" onClick="register_to_cloud();">Register</button>
+            </div>
+            <span id="response" style="color:black;"></span>
          </div>
       </div>
    </body>
