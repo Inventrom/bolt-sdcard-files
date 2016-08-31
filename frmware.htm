@@ -15,7 +15,7 @@
          margin: 80px auto;
          }
          .wifi-screen {
-         width: 700px !important;
+         width: 80% !important;
          background-color: #FFF;
          padding: 20px;
          border-radius: 5px
@@ -39,6 +39,16 @@
          }
       </style>
       <script> 
+      function version(){
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+               document.getElementById("bolt_version").innerHTML=xmlhttp.responseText;
+           }
+          };
+         xmlhttp.open("GET","/version",true);
+         xmlhttp.send();
+      }
        function check_terms_agreed(){
          if(document.getElementById('term').checked) {
             var term_object = document.getElementById("update_button");
@@ -65,24 +75,32 @@
    </head>
    <body>
       <div class="wifi" align="center">
-         <div class="wifi-screen" style="width:400px;">
+         <div class="wifi-screen">
             <div class="app-title">
                <h1>BOLT Firmware</h1>
 
                <table>
-                 <tr><td><b> Please read the following instructions before proceeding with the update </b></tr></td>
+                 <tr><td><b> Please read the following instructions carefully before proceeding with the update </b></tr></td>
                   <tr><td>* Do not disconnect the power supply while updating.</tr></td>
-                  <tr><td> * Ideally update the device while it is connected to fully charged Power-bank/Laptop
+                  <tr><td>* Ideally update the device while it is connected to a fully charged Power-bank/Laptop
                  <tr><td>* In case the  BOLT loses power supply then it could permanently damage  the BOLT unit .</tr></td>
-                  <tr><td>* The update is not possible for devices lesser tha version -1.3.1 </tr></td>
+                  <tr><td>* The update is not possible for devices lesser than firmware version -1.3.1. </tr></td>
+                  <tr><td>* You can check you firmware version here <span style="color:blue;font-size:bold;cursor: pointer; cursor: hand;" onclick="version()">version </span> : <span id="bolt_version"> </span>
+                  </tr></td>
+                  <tr><td>* Once you click on update ,browser window will become inactive and the bolt will start downloading firmware. </tr></td>
+                  <tr><td>* It takes 2-3 minutes in donwloading firmware on a normal internet speed. </tr></td>
+                  <tr><td>* Once the firmware is downloaded BOLT will restart automatically i.e green light will start blinking for two seconds. </tr></td>
+
+                  <tr><td>* Once it's restart,you can check your version is settings.  </tr></td>
                   </tr></td>
                </table>
                <input type="radio" name="terms"  id="term" value="checked" onchange="check_terms_agreed()"> I have read and agreed terms and condition.<br>
             </div>
             <div class="wifi-form">
-               <button id="update_button" class="btn" onclick="update_firmware()" disabled>Update</button>
-
-               <span id="response_bolt_update"></span>
+               <button id="update_button" class="btn" onclick="update_firmware();" disabled>Update</button>
+               <br>
+               <span id="response_bolt_update"></span> <br>
+               <a href="/settings">Back to settings</a>
             </div>
          </div>
       </div>
