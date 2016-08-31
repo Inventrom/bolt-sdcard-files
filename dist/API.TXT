@@ -1,0 +1,9 @@
+IFTTT_key:
+IFTTT_pin:0
+IFTTT_state:low
+IFTTT_enabled:0
+TS_enabled:0
+TS_pin:0
+TS_key:
+TS_field:field1
+TS_type:digital
