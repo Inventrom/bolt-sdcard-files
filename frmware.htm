@@ -90,7 +90,8 @@
                   <tr><td>* Ideally update the device while it is connected to a fully charged Power-bank/Laptop
                  <tr><td>* In case the  BOLT loses power supply then it could permanently damage  the BOLT unit .</tr></td>
                   <tr><td>* The update is not possible for devices lesser than firmware version -1.3.1. </tr></td>
-                  <tr><td>* You can check you firmware version here <span style="color:blue;font-size:bold;cursor: pointer; cursor: hand;" onclick="version()">version </span> : <span id="bolt_version"> </span>
+                  <tr><td>* You can check you firmware version here <span style="color:blue;font-size:bold;cursor: pointer; cursor: hand;" onclick="version()">version </span> :
+                <tr><td><span id="bolt_version"> </span> </tr></td>*
                   </tr></td>
                   <tr><td>* Once you click on update ,browser window will become inactive and the bolt will start downloading firmware. </tr></td>
                   <tr><td>* It takes 2-3 minutes in donwloading firmware on a normal internet speed. </tr></td>
@@ -103,8 +104,8 @@
             </div>
             <div class="wifi-form">
                <button id="update_button" class="btn" onclick="update_firmware()" disabled>Update</button>
+               <br>
                <span id="response_bolt_update"></span>
-               <button id="update_button" class="btn" onclick="update_firmware();" disabled>Update</button>
                <br>
                <span id="response_bolt_update"></span> <br>
                <a href="/settings">Back to settings</a>
